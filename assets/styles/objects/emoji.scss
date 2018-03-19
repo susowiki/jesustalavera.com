@@ -1,0 +1,53 @@
+@keyframes TOOLTIP {
+  from {
+    opacity: 0;
+    transform: translate(0, .5em);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* Style for the tool-tip */
+
+span[role=img][aria-label],
+span[role=img][aria-label] {
+  position: relative;
+
+  &:focus,
+  &:hover {
+    &::before,
+    &::after {
+      position: absolute;
+      animation: TOOLTIP .1s ease-out 1;
+    }
+
+    &::before {
+      content: '';
+      bottom: 1.5em;
+      left: .25em;
+      z-index: 2;
+      width: 0;
+      height: 0;
+      border-left: .375em solid transparent;
+      border-right: .375em solid transparent;
+      border-top: .375em solid var(--c-highlight);
+    }
+
+    &::after {
+      display: block;
+      left: 0;
+      bottom: 2.125em;
+      z-index: 1;
+      max-width: 10em;
+      padding: .5em;
+      border-radius: .25em;
+      box-shadow: 0 .25em 1em #aaa;
+      content: attr(aria-label);
+      background-color: var(--c-highlight);
+      color: rgba(255,255,255,1);
+      font-size: 80%;
+    }
+  }
+}

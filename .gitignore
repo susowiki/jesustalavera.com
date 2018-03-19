@@ -1,0 +1,31 @@
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+static/sw.js
+static/workbox-sw*.js
+static/workbox-sw*.js.map
+
+# local config file
+.env.json
+
+# generated sitemap
+static/sitemap.xml
+
+# generated lambda functions
+.functions
+
+# generated sqip images and map
+.sqip
+plugins/image-map.js
+
+*.idea
+*.iml

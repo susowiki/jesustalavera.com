@@ -1,0 +1,19 @@
+echo "⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐"
+echo "Building Lambda Functions"
+./node_modules/.bin/netlify-lambda build ./functions
+
+echo "⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐"
+echo "Generating Sqip previews"
+NODE_ENV=production ./scripts/sqip-it
+
+echo "⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐"
+echo "Generating Static Site"
+NODE_ENV=production ./node_modules/.bin/nuxt generate
+
+echo "⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐"
+echo "Validating Markup"
+./scripts/check-markup
+
+echo "⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐"
+echo "Creating RSS Feeds"
+./scripts/create-rss-feed

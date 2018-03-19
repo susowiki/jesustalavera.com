@@ -1,0 +1,22 @@
+.o-headline-1, .o-headline-2, .o-headline-3 {
+  font-family: 'Georgia', serif;
+  font-weight: normal;
+  margin: 0 0 .5em;
+}
+
+.o-headline-1 {
+  font-size: 2em;
+  text-align: center;
+}
+
+.o-headline-2 {
+  font-size: 1.5em;
+}
+
+.o-headline-3 {
+  font-size: 1.25em;
+}
+
+.o-headline-1 a, .o-headline-2 a {
+  text-decoration: none;
+}

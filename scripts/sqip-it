@@ -1,0 +1,176 @@
+#!/usr/bin/env node
+
+const contentful = require('contentful')
+const { getConfigForKeys } = require('../lib/config.js')
+const {
+  CTF_SPACE_ID,
+  CTF_CDA_TOKEN,
+  CTF_CPA_TOKEN,
+  MY_AWS_ACCESS_KEY_ID,
+  MY_AWS_SECRET_ACCESS_KEY,
+  MY_AWS_S3_REGION,
+  MY_AWS_S3_BUCKET
+} = getConfigForKeys([
+  'CTF_SPACE_ID',
+  'CTF_CDA_TOKEN',
+  'CTF_CPA_TOKEN',
+  'MY_AWS_ACCESS_KEY_ID',
+  'MY_AWS_SECRET_ACCESS_KEY',
+  'MY_AWS_S3_REGION',
+  'MY_AWS_S3_BUCKET'
+])
+const {exec} = require('child_process')
+const download = require('download')
+const path = require('path')
+const {promisify} = require('util')
+const {writeFile, readFile} = require('fs')
+const timeSpan = require('time-span')
+const fetch = require('node-fetch')
+
+const SQIP_DESTINATION = path.resolve(__dirname, '..', '.sqip')
+const JS_DESTINATION = path.resolve(__dirname, '..', 'plugins', 'image-map.js')
+const SQIP_EXEC = path.resolve(__dirname, '..', 'node_modules', '.bin', 'sqip')
+
+const ora = require('ora')
+
+const client = contentful.createClient({
+  accessToken:
+    process.env.NODE_ENV === 'production'
+      ? CTF_CDA_TOKEN
+      : CTF_CPA_TOKEN,
+  host:
+    process.env.NODE_ENV === 'production'
+      ? 'cdn.contentful.com'
+      : 'preview.contentful.com',
+  space: CTF_SPACE_ID
+})
+
+const AWS = require('aws-sdk')
+AWS.config.update({
+  accessKeyId: MY_AWS_ACCESS_KEY_ID,
+  secretAccessKey: MY_AWS_SECRET_ACCESS_KEY,
+  region: MY_AWS_S3_REGION
+})
+const s3 = new AWS.S3()
+const baseParams = {Bucket: MY_AWS_S3_BUCKET, ACL: 'public-read'}
+const spinner = ora({spinner: 'dots12'})
+
+const write = promisify(writeFile)
+const read = promisify(readFile)
+const execute = promisify(exec)
+
+async function sqipItems () {
+  const end = timeSpan()
+
+  // --------------------------------------------
+
+  spinner.text = 'Getting asset information'
+  spinner.start()
+  const {items} = await client.getAssets({limit: 1000})
+  let images = items
+    .filter(
+      ({fields}) => fields.file && ['image/png', 'image/jpeg'].indexOf(fields.file.contentType) !== -1
+    )
+    .map(({sys, fields}) => ({
+      id: sys.id,
+      url: fields.file.url,
+      filename: `${sys.id}.${fields.file.contentType.split('/')[1]}`,
+      svg: null
+    }))
+  spinner.succeed('Asset information queried')
+
+  // --------------------------------------------
+
+  spinner.text = 'Getting S3 cached SVGs'
+  spinner.start()
+  images = await Promise.all(images.map(async (image) => {
+    try {
+      const response = await fetch(`https://s3.amazonaws.com/stefanjudis-com-sqip-cache/${image.id}.svg`)
+      const svg = await response.text()
+
+      if (svg.startsWith('<svg')) {
+        image.svg = svg
+      }
+    } catch (e) {}
+
+    return image
+  }))
+  spinner.succeed('Cached SVGs downloaded')
+
+  // --------------------------------------------
+
+  spinner.text = 'Downloading images for missing SVGs...'
+  spinner.start()
+  await Promise.all(
+    images.map(({url, filename, svg}) => {
+      if (!svg) {
+        return download(
+          url.replace(/\/\//, 'https://'),
+          SQIP_DESTINATION,
+          { filename }
+        )
+      }
+
+      return Promise.resolve()
+    })
+  )
+  spinner.succeed('Images downloaded')
+
+  // --------------------------------------------
+
+  spinner.text = 'Creating missing SVGs...'
+  spinner.start()
+  await Promise.all(images.map(({id, filename, svg}) => {
+    if (!svg) {
+      const command = `${SQIP_EXEC} -o ${id}.svg -n 15 -m 0 -b 0 ${filename}`
+
+      return execute(
+        command,
+        {cwd: SQIP_DESTINATION}
+      )
+    }
+
+    return Promise.resolve()
+  }))
+  spinner.succeed('SVGs created')
+
+  // --------------------------------------------
+
+  spinner.text = 'Reading and caching missing SVGs...'
+  spinner.start()
+  images = await Promise.all(images.map(async (image) => {
+    if (!image.svg) {
+      const data = await read(path.join(SQIP_DESTINATION, `${image.id}.svg`))
+      await new Promise((resolve, reject) => {
+        s3.upload(Object.assign({}, baseParams, {Key: `${image.id}.svg`, Body: data}), (err) => {
+          if (err) {
+            return reject(err)
+          }
+
+          resolve()
+        })
+      })
+
+      image.svg = data
+    }
+
+    return image
+  }))
+  spinner.succeed('SVGs read and cached')
+
+  // --------------------------------------------
+
+  spinner.text = 'Writing JS mapping file'
+  spinner.start()
+  write(
+    JS_DESTINATION,
+    `export default {\n  ${images.map(({id, svg}) => `'${id}': '${svg}'`).join(', ')}\n}\n`
+  )
+  spinner.succeed('JS file written')
+
+  // --------------------------------------------
+
+  console.log(end.seconds())
+}
+
+sqipItems()

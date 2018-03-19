@@ -1,0 +1,14 @@
+/*/
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' just-comments.com www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: images.contentful.com images.ctfassets.net www.gravatar.com www.google-analytics.com just-comments.com; font-src 'none' ; connect-src 'self' cdn.contentful.com images.contentful.com videos.contentful.com images.ctfassets.net videos.ctfassets.net service.just-comments.com www.google-analytics.com; media-src 'self' videos.contentful.com videos.ctfassets.net; object-src 'self'; frame-src 'none'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content; disown-opener; manifest-src 'self' 'self'; prefetch-src 'self' ; report-uri /.netlify/functions/report/;
+
+/_nuxt/*
+  Cache-Control: max-age=31556926
+
+/favicon.ico
+  Cache-Control: max-age=3600000
+
+/sw.js
+  Cache-Control: max-age=100000
+
+/workbox-sw.prod.v1.1.0.js
+  Cache-Control: max-age=100000

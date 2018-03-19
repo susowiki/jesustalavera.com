@@ -1,0 +1,48 @@
+.o-anchorHeadline {
+  &::before {
+    content: "#";
+    padding: 0.125em 0.375em;
+    background: var(--grey-bright);
+    border-radius: 0.125em;
+    margin-right: 0.5em;
+    font-weight: 800;
+    color: var(--c-highlight);
+  }
+
+  &:hover {
+    &::before {
+      background: var(--c-highlight);
+      color: #fff;
+    }
+  }
+}
+
+.o-anchorContainer {
+  position: relative;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: .25em 4.5rem .25em 1rem;
+  padding-left: 1rem;
+  padding-right: 2.5rem;
+
+  a {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    font-size: 1.25rem;
+    padding: 0.25em 0.75em;
+    color: var(--c-highlight);
+    background: var(--grey-bright);
+    text-decoration: none;
+    transform: translateY(-50%);
+
+    &:hover {
+      color: #fff;
+      background: var(--c-highlight);
+    }
+  }
+
+  &:target {
+    background: var(--blue-brighter);
+  }
+}

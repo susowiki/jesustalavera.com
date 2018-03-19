@@ -1,0 +1,55 @@
+.o-code {
+  position: relative;
+
+  background: #333;
+
+  padding: 1em;
+  margin: .25em -1em;
+}
+
+.o-code::before {
+  position : absolute;
+  top  : 0;
+  right : 0;
+
+  z-index : 1;
+
+  padding : .5em .75em;
+
+  font-size   : .8em;
+  font-family : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color      : #ddd;
+
+  content : '//';
+  background: var(--c-highlight);
+}
+
+.o-code.o-code-html::before { content : 'html'; }
+.o-code.o-code-css::before { content : 'css'; }
+.o-code.o-code-javascript::before { content : 'js'; }
+.o-code.o-code-json::before { content : 'json'; }
+.o-code.o-code-bash::before { content : 'bash'; }
+
+.o-code code {
+  display: block;
+  position: relative;
+  max-width: 40em;
+  font-size: 1em;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: transparent;
+  color: inherit;
+  border: none;
+  overflow: auto;
+  color: #ddd !important;
+}
+
+.o-code .token.keyword, .o-code .token.boolean, .o-code .token.number { color: var(--blue-bright); font-weight: bold; }
+.o-code .token.string, .o-code .token.template-string { color: var(--red-bright); }
+.o-code .token.tag { color: var(--blue-bright); font-weight: bold; }
+.o-code .token.attr-name { color: #ddd; font-weight: normal; }
+.o-code .token.attr-value { color: var(--red-bright); font-weight: normal; }
+.o-code .token.attr-value .punctuation { color: var(--grey); }
+.o-code .token.atrule .rule { color: var(--red-bright); }
+.o-code .token.selector { color: var(--blue-bright); }
+.o-code .token.comment { color: #aaa; }

@@ -1,0 +1,77 @@
+.o-list-reset {
+  list-style : none;
+
+  margin  : 0;
+  padding : 0;
+}
+
+.o-list-thirds, .o-list-halds {
+  list-style : none;
+
+  margin : 0 -.5em;
+  padding : 0;
+
+  display : flex;
+  flex-direction : column;
+}
+
+@media (min-width: 52em) {
+  .o-list-thirds {
+    flex-direction : row;
+    flex-wrap      : wrap;
+  }
+}
+
+.o-list-thirds > li {
+  /* safari hack */
+  display : table;
+
+  flex : 1 1 calc( 33.333% - 2em );
+  margin : 0 .5em 2em;
+
+  max-width : 100%;
+  width: calc(100% - 1em);
+}
+
+@media (min-width: 52em) {
+  .o-list-thirds {
+    margin: 0 -.625em;
+  }
+
+  .o-list-thirds > li {
+    display : block;
+
+    max-width : calc(33.333% - 1.25em);
+
+    margin : 0 .625em 2em;
+  }
+}
+
+.o-list-inline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.o-list-inline > li {
+  margin: 0;
+  padding: 0;
+
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.o-list-grid {
+  display: grid;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  grid-template-rows: 1fr;
+  grid-gap: 1.5em 1em;
+
+  > li {
+    margin: 0;
+    padding: 0;
+  }
+}

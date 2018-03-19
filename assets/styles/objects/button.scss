@@ -1,0 +1,71 @@
+.o-btn {
+  display: inline-block;
+  font-size: 1em;
+  border: none;
+  background: var(--c-highlight);
+  color: #fff;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-radius: 0.125em;
+  text-shadow: 0 1px 1px var(--grey-dark);
+  transition: transform 0.125s ease-in-out;
+  box-shadow: var(--shadow-btn);
+
+  &:hover {
+    background: var(--c-highlight);
+    color: #fff;
+    text-shadow: 0 1px 2px var(--grey-dark);
+
+    transform: translate(0, -0.0625em);
+  }
+
+  &:active {
+    filter: brightness(0.75);
+  }
+}
+
+.o-btn--small {
+  padding: 0.25em 0.5em;
+}
+
+.o-btn--tiny {
+  font-size: .75em;
+  padding: 0.25em 0.5em;
+}
+
+.o-btn--icon {
+  width: 2.5em;
+  height: 2.5em;
+  background: var(--grey-very-dark);
+  color: var(--grey-bright);
+  border: none;
+  border-radius: 50%;
+  padding: .25em;
+
+  svg {
+    width: 100%;
+    height: 100%;
+
+    path {
+      fill: currentColor;
+    }
+  }
+
+  &:hover {
+    background: var(--c-highlight);
+    color: #fff;
+    text-shadow: 0 1px 2px var(--grey-dark);
+
+    transform: translate(0, -0.0625em);
+  }
+
+  &:active {
+    filter: brightness(0.75);
+  }
+}
+
+.o-btn--floating {
+  color: #fff;
+  padding: 0.25em .75em;
+  box-shadow: 0 .375em 1.5em #aaa;
+}

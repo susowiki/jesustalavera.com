@@ -1,0 +1,104 @@
+#!/usr/bin/env node
+
+const { promisify } = require('util')
+const chalk = require('chalk')
+const glob = promisify(require('glob'))
+const readFile = promisify(require('fs').readFile)
+const writeFile = promisify(require('fs').writeFile)
+const jsdom = require('jsdom')
+const RSS = require('rss')
+
+const BASE_URL = 'https://www.stefanjudis.com'
+const BASE_FEED_TITLE = 'Stefan Judis Web Development'
+const FEED_DEFAULTS = {
+  title: `${BASE_FEED_TITLE}`,
+  site_url: BASE_URL,
+  managingEditor: 'Stefan Judis',
+  webMaster: 'Stefan Judis',
+  language: 'en'
+}
+
+const sortByDate = (prev, cur) => new Date(cur.date) - new Date(prev.date)
+;(async () => {
+  try {
+    const feeds = await Promise.all(
+      [
+        {
+          glob: './dist/blog/*/index.html',
+          file: 'blog.xml',
+          name: 'Blog Posts'
+        },
+        {
+          glob: './dist/today-i-learned/*/index.html',
+          file: 'til.xml',
+          name: 'Today I learned Posts'
+        }
+      ].map(async feed => {
+        feed.files = await glob(feed.glob)
+        feed.items = (await getFeedItemsForFiles(feed.files)).sort(sortByDate)
+
+        await writeRssFeed(feed)
+
+        return feed
+      })
+    )
+
+    const allItems = feeds
+      .reduce((items, current) => {
+        return items.concat(current.items)
+      }, [])
+      .sort(sortByDate)
+
+    await writeRssFeed({
+      file: 'rss.xml',
+      items: allItems
+    })
+
+    console.log(chalk.green('---------------------'))
+  } catch (e) {
+    console.error(e)
+  }
+})()
+
+async function writeRssFeed (feed) {
+  const rssFeed = new RSS(
+    Object.assign(FEED_DEFAULTS, {
+      title: feed.name ? `${BASE_FEED_TITLE} | ${feed.name}` : BASE_FEED_TITLE,
+      feed_url: `${BASE_URL}/${feed.file}`
+    })
+  )
+
+  feed.items.forEach(item => rssFeed.item(item))
+
+  await writeFile(`./dist/${feed.file}`, rssFeed.xml())
+  console.log(chalk.green(`✔ ${feed.file} written`))
+}
+
+function getFeedItemsForFiles (files) {
+  return Promise.all(
+    files.map(filePath => {
+      return (async () => {
+        // overwrite the console
+        // to get rid of error I don't care about
+        const virtualConsole = new jsdom.VirtualConsole()
+        const { document } = new jsdom.JSDOM(await readFile(filePath, 'utf8'), {
+          virtualConsole
+        }).window
+
+        const isTil = /today-i-learned/.test(filePath)
+
+        return {
+          date: document.querySelector('.c-prettyDate').innerHTML,
+          title: `${isTil ? 'TIL: ' : ''}${
+            document.querySelector('h1').innerHTML
+          }`,
+          description: document.querySelector('meta[name="description"]')
+            .content,
+          url: `${BASE_URL}${filePath
+            .replace('./dist', '')
+            .replace('index.html', '')}`
+        }
+      })()
+    })
+  )
+}
