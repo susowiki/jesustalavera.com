@@ -14,9 +14,6 @@ static/sw.js
 static/workbox-sw*.js
 static/workbox-sw*.js.map
 
-# local config file
-.env.json
-
 # generated sitemap
 static/sitemap.xml
 
