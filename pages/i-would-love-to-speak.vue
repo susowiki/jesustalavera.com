@@ -104,7 +104,7 @@
     },
     head () {
       return {
-        title: `Stefan Judis Web Development - Speaker information`,
+        title: `Jesus Talavera Web Development - Speaker information`,
         meta: [
           { hid: 'description', name: 'description', content: `You want me to speak at your event? Great - here is some basic information` }
         ]

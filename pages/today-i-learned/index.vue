@@ -51,7 +51,7 @@
     },
     head () {
       return {
-        title: 'Today I learned | Stefan Judis Web Development',
+        title: 'Today I learned | Jesus Talavera Web Development',
         meta: [
           { hid: 'description', name: 'description', content: `My daily Web Development learnings` }
         ]

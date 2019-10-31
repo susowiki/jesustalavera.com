@@ -7,7 +7,7 @@
         </nuxt-link>
         <svg viewBox="0 0 380 200" class="c-newsletter__letter" preserveAspectRatio="none"><rect fill="#F8F8F8" width="380" height="200" rx="5"/><path fill="#E7E7E7" d="M190 35l188 162H2z"/><path fill="#D2D2D2" d="M190 132L2 3h376z"/></svg>
         <h1 tabindex="-1" class="u-noMarginBottom u-marginTopMedium">Monthly digest</h1>
-        <form style="text-align:center;" action="https://tinyletter.com/stefanjudis" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/stefanjudis', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+        <form style="text-align:center;" action="https://tinyletter.com/jesustalavera" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/stefanjudis', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
           <p class="u-marginBottomLarge u-noMarginTop">
             <nuxt-link to="/blog/">New posts</nuxt-link> and <nuxt-link to="/today-i-learned">new learnings</nuxt-link> directly to your inbox.
           </p>
@@ -34,7 +34,7 @@
   export default createPage({
     head () {
       return {
-        title: `Stefan Judis Web Development - Newsletter`,
+        title: `Jesus Talavera Web Development - Newsletter`,
         meta: [
           { hid: 'description', name: 'description', content: `Subscribe to my monthly newsletter` }
         ]

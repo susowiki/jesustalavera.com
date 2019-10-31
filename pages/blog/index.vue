@@ -30,7 +30,7 @@
     },
     head () {
       return {
-        title: 'Blog | Stefan Judis Web Development',
+        title: 'Blog | Jesus Talavera Web Development',
         meta: [
           { hid: 'description', name: 'description', content: `Writings on web development including mainly JavaScript, web performance and accessibility.` }
         ]

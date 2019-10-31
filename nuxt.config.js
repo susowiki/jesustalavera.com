@@ -39,14 +39,14 @@ const config = {
     htmlAttrs: {
       lang: 'en'
     },
-    title: 'Stefan Judis Web Development',
+    title: 'Jesus Talavera Web Development',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'theme-color', content: '#fefff4' },
       {
         property: 'og:image',
-        content: 'https://www.stefanjudis.com/og-card-logo.jpg'
+        content: 'https://www.jesustalavera.com/og-card-logo.jpg'
       }
     ],
     link: [
@@ -58,20 +58,20 @@ const config = {
       {
         rel: 'alternate',
         type: 'application/rss+xml',
-        title: 'Stefan Judis Web Development (everything)',
-        href: 'https://www.stefanjudis.com/rss.xml'
+        title: 'Jesus Talavera Web Development (everything)',
+        href: 'https://www.jesustalavera.com/rss.xml'
       },
       {
         rel: 'alternate',
         type: 'application/rss+xml',
-        title: 'Stefan Judis Web Development (only blog posts)',
-        href: 'https://www.stefanjudis.com/blog.xml'
+        title: 'Jesus Talavera Web Development (only blog posts)',
+        href: 'https://www.jesustalavera.com/blog.xml'
       },
       {
         rel: 'alternate',
         type: 'application/rss+xml',
-        title: 'Stefan Judis Web Development (only TIL)',
-        href: 'https://www.stefanjudis.com/til.xml'
+        title: 'Jesus Talavera Web Development (only TIL)',
+        href: 'https://www.jesustalavera.com/til.xml'
       }
     ],
     script: [
@@ -122,7 +122,7 @@ const config = {
       '@nuxtjs/pwa',
       {
         manifest: {
-          name: 'Stefan Judis Web Development',
+          name: 'Jesus Talavera Web Development',
           lang: 'en',
           short_name: 'SJ Web Dev',
           theme_color: '#fefff4'
@@ -193,7 +193,7 @@ const config = {
   // '@nuxtjs/sitemap'
   sitemap: {
     generate: true,
-    hostname: 'https://www.stefanjudis.com',
+    hostname: 'https://www.jesustalavera.com',
     routes: getAllRoutes,
     exclude: ['/404']
   },

@@ -60,7 +60,7 @@
     },
     head () {
       return {
-        title: `Talks | Stefan Judis Web Development`,
+        title: `Talks | Jesus Talavera Web Development`,
         meta: [
           { hid: 'description', name: 'description', content: `Listing of my upcoming events and talks` }
         ]

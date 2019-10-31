@@ -1,8 +1,8 @@
 {
-  "name": "stefan-judis-website-nuxt",
+  "name": "jesus-talavera-website-nuxt",
   "version": "1.0.0",
-  "description": "Personal website of Stefan Judis",
-  "author": "stefan judis <stefanjudis@gmail.com>",
+  "description": "Personal website of Jesus Talavera",
+  "author": "Jesus Talavera <susowiki@gmail.com>",
   "private": true,
   "dependencies": {
     "@nuxtjs/google-analytics": "^1.0.0",

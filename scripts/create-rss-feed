@@ -8,13 +8,13 @@ const writeFile = promisify(require('fs').writeFile)
 const jsdom = require('jsdom')
 const RSS = require('rss')
 
-const BASE_URL = 'https://www.stefanjudis.com'
-const BASE_FEED_TITLE = 'Stefan Judis Web Development'
+const BASE_URL = 'https://www.jesustalavera.com'
+const BASE_FEED_TITLE = 'Jesus Talavera Web Development'
 const FEED_DEFAULTS = {
   title: `${BASE_FEED_TITLE}`,
   site_url: BASE_URL,
-  managingEditor: 'Stefan Judis',
-  webMaster: 'Stefan Judis',
+  managingEditor: 'Jesus Talavera',
+  webMaster: 'Jesus Talavera',
   language: 'en'
 }
 
