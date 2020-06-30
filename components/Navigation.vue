@@ -59,8 +59,8 @@
         ],
         reducedNav: [
           { label: 'Home', url: '/' },
-          { label: 'Blog', url: '/blog/' },
-          { label: 'Resources', url: '/resources' }
+          // { label: 'Blog', url: '/blog/' },
+          { label: 'Resume', url: '/resources' }
         ],
         showFullNav: true
       }

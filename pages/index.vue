@@ -4,34 +4,6 @@
       <h1 slot="headline" class="o-headline-1" tabindex="-1">Hey, I'm Jesús Talavera. Software developer.</h1>
       <Person :person="me"></Person>
     </Container>
-    <Container>
-      <h2 slot="headline">Blog</h2>
-      <ul class="o-list-thirds">
-        <li v-for="post in posts" :key="post.sys.id">
-          <ItemPreview :item="post" :level="3" :show-date="true"></itemPreview>
-        </li>
-      </ul>
-      <nuxt-link slot="footerLine" to="/blog/" class="o-btn">See all posts</nuxt-link>
-    </Container>
-    <Container>
-      <h2 slot="headline">Talks</h2>
-      <ul class="o-list-thirds">
-        <li v-for="talk in talks" :key="talk.sys.id">
-          <Talk :talk="talk"/>
-        </li>
-      </ul>
-      <nuxt-link slot="footerLine" to="/talks/"  class="o-btn">See my past and upcoming talks</nuxt-link>
-    </Container>
-    <Container>
-      <h2 slot="headline">Developer Smalltalk</h2>
-      <ul class="o-list-thirds">
-        <li v-for="screencast in screencasts" :key="screencast.sys.id">
-          <Screen-cast :screencast="screencast" />
-        </li>
-      </ul>
-
-      <nuxt-link slot="footerLine" to="/smalltalk/" class="o-btn">See all episodes</nuxt-link>
-    </Container>
   </div>
 </template>
 
