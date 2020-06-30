@@ -48,11 +48,11 @@
         mainNavIsVisible: false,
         mainNav: [
           { label: 'Home', url: '/', icon: 'Home' },
-          { label: 'Blog', url: '/blog/', icon: 'Blog' },
-          { label: 'Resources', url: '/resources/', icon: 'Resources' },
-          { label: 'Talks', url: '/talks/', icon: 'Talk' },
-          { label: 'Smalltalk', url: '/smalltalk/', icon: 'Smalltalk' },
-          { label: 'Today I learned', url: '/today-i-learned/', icon: 'Learn' }
+          // { label: 'Blog', url: '/blog/', icon: 'Blog' },
+          { label: 'Resume', url: '/resources/', icon: 'Resources' },
+          // { label: 'Talks', url: '/talks/', icon: 'Talk' },
+          // { label: 'Smalltalk', url: '/smalltalk/', icon: 'Smalltalk' },
+          // { label: 'Today I learned', url: '/today-i-learned/', icon: 'Learn' }
           // { label: 'Projects', url: '/projects/', icon: 'Project' },
           // { label: 'Snippets', url: '/snippets/', icon: 'Snippet' }
 
