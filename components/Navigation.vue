@@ -49,7 +49,7 @@
         mainNav: [
           { label: 'Home', url: '/', icon: 'Home' },
           // { label: 'Blog', url: '/blog/', icon: 'Blog' },
-          { label: 'Resume', url: '/resources/', icon: 'Resources' }
+          { label: 'Resources', url: '/resources/', icon: 'Resources' }
           // { label: 'Talks', url: '/talks/', icon: 'Talk' },
           // { label: 'Smalltalk', url: '/smalltalk/', icon: 'Smalltalk' },
           // { label: 'Today I learned', url: '/today-i-learned/', icon: 'Learn' }
@@ -60,7 +60,7 @@
         reducedNav: [
           { label: 'Home', url: '/' },
           // { label: 'Blog', url: '/blog/' },
-          { label: 'Resume', url: '/resources' }
+          { label: 'Resources', url: '/resources' }
         ],
         showFullNav: true
       }

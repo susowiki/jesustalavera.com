@@ -7,7 +7,6 @@
           <strong>Last updated at: <PrettyDate v-if="page.fields.isResource" slot="date" :date="page.sys.updatedAt"></PrettyDate></strong>
         </p>
         <Marked :markdown="page.fields.body" class="e-content"></Marked>
-        <SharingLine v-if="page.fields.slug !== '404'" :item="page"></SharingLine>
       </div>
     </div>
   </Container>
