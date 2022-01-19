@@ -12,7 +12,7 @@
     "emoji-regex": "^6.5.1",
     "inert-polyfill": "^0.2.5",
     "mailgun-js": "^0.16.0",
-    "marked": "^0.3.12",
+    "marked": "^4.0.10",
     "netlify-lambda": "^0.2.0",
     "nuxt": "^1.4.0",
     "prismjs": "^1.6.0",
