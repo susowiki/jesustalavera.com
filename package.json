@@ -54,7 +54,7 @@
     "jsdom": "^11.1.0",
     "netlify-cli": "^1.2.2",
     "node-fetch": "^2.1.1",
-    "node-sass": "^4.5.3",
+    "node-sass": "^7.0.0",
     "ora": "^2.0.0",
     "rss": "^1.2.2",
     "sass-loader": "^6.0.6",
