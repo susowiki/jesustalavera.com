@@ -13,8 +13,8 @@
     "inert-polyfill": "^0.2.5",
     "mailgun-js": "^0.16.0",
     "marked": "^0.3.12",
-    "netlify-lambda": "^0.2.0",
-    "nuxt": "^1.4.0",
+    "netlify-lambda": "^2.0.15",
+    "nuxt": "^3.0.0",
     "prismjs": "^1.6.0",
     "url": "^0.11.0",
     "wicg-focus-ring": "^2.0.1"
@@ -59,8 +59,8 @@
     "rss": "^1.2.2",
     "sass-loader": "^6.0.6",
     "sqip": "^0.3.2",
-    "svg-inline-loader": "^0.8.0",
+    "svg-inline-loader": "^0.8.2",
     "time-span": "^2.0.0",
-    "webpack": "^3.4.1"
+    "webpack": "^5.75.0"
   }
 }
