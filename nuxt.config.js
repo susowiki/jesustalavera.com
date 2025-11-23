@@ -33,7 +33,7 @@ const cmaClient = cmaContentful.createClient({
   accessToken: ctfConfig.CTF_CMA_TOKEN
 })
 
-function getAllRoutes () {
+function getAllRoutes() {
   return Promise.all([
     cdaClient.getEntries({
       content_type: '2wKn6yEnZewu2SCCkus4as',
@@ -48,7 +48,8 @@ function getAllRoutes () {
     }),
     cmaClient
       .getSpace(ctfConfig.CTF_SPACE_ID)
-      .then(space => space.getContentType('2wKn6yEnZewu2SCCkus4as'))
+      .then(space => space.getEnvironment('master'))
+      .then(environment => environment.getContentType('2wKn6yEnZewu2SCCkus4as'))
   ]).then(([blogPosts, tilPosts, landingPages, postType]) => {
     const postPages = blogPosts.items.reduce((pages, entry, index) => {
       // the external posts don't need do be rendered
@@ -191,7 +192,7 @@ module.exports = {
   build: {
     friendlyErrors: false,
     analyze: false,
-    extend (config, ctx) {
+    extend(config, ctx) {
       // Find and modify existing rules that might handle SVGs
       const rules = config.module.rules
       rules.forEach((rule) => {
