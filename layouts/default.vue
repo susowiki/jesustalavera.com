@@ -35,17 +35,17 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '../assets/styles/objects/anchor.scss';
-  @import '../assets/styles/objects/button.scss';
-  @import '../assets/styles/objects/code.scss';
-  @import '../assets/styles/objects/emoji.scss';
-  @import '../assets/styles/objects/headline.scss';
-  @import '../assets/styles/objects/grid.scss';
-  @import '../assets/styles/objects/list.scss';
-  @import '../assets/styles/objects/tile.scss';
-  @import '../assets/styles/objects/tag.scss';
-  @import '../assets/styles/transitions.scss';
-  @import '../assets/styles/util.scss';
+  @use '../assets/styles/objects/anchor.scss';
+  @use '../assets/styles/objects/button.scss';
+  @use '../assets/styles/objects/code.scss';
+  @use '../assets/styles/objects/emoji.scss';
+  @use '../assets/styles/objects/headline.scss';
+  @use '../assets/styles/objects/grid.scss';
+  @use '../assets/styles/objects/list.scss';
+  @use '../assets/styles/objects/tile.scss';
+  @use '../assets/styles/objects/tag.scss';
+  @use '../assets/styles/transitions.scss';
+  @use '../assets/styles/util.scss';
 
   body {
     --blue: #1d7cbb;

@@ -192,6 +192,11 @@ module.exports = {
   build: {
     friendlyErrors: false,
     analyze: false,
+    loaders: {
+      scss: {
+        implementation: require('sass')
+      }
+    },
     extend(config, ctx) {
       // Find and modify existing rules that might handle SVGs
       const rules = config.module.rules
