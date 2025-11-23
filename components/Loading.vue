@@ -1,12 +1,15 @@
- <template>
+<template>
   <div>
-    <div class="nuxt-progress" :style="{
-      'width': percent+'%',
-      'opacity': show ? 1 : 0
-    }"></div>
+    <div
+      class="nuxt-progress"
+      :style="{
+        'width': percent+'%',
+        'opacity': show ? 1 : 0
+      }"
+    />
     <div class="c-logo">
       <nuxt-link :to="'/'" aria-label="Home" :class="[loading ? 'is-loading': '']">
-        <svg aria-hidden="true" width="36" height="36" viewbox="0 0 436 436" xmlns="http://www.w3.org/2000/svg"><path d="M228.682 396.419c-6.504 4.687-15.042 4.578-21.4 0C198.852 390.279 0 244.327 0 128.75 0 48.308 59.55.239 117.102.239c34.553 0 75.21 17.876 100.898 64.819C243.615 18.115 284.308.239 318.861.239 376.45.24 436 48.309 436 128.751c0 115.576-198.889 261.527-207.318 267.668z" fill="#fff"/></svg>
+        <svg aria-hidden="true" width="36" height="36" viewbox="0 0 436 436" xmlns="http://www.w3.org/2000/svg"><path d="M228.682 396.419c-6.504 4.687-15.042 4.578-21.4 0C198.852 390.279 0 244.327 0 128.75 0 48.308 59.55.239 117.102.239c34.553 0 75.21 17.876 100.898 64.819C243.615 18.115 284.308.239 318.861.239 376.45.24 436 48.309 436 128.751c0 115.576-198.889 261.527-207.318 267.668z" fill="#fff" /></svg>
       </nuxt-link>
     </div>
   </div>
@@ -15,7 +18,7 @@
 <script>
 import Vue from 'vue'
 export default {
-  name: 'nuxt-loading',
+  name: 'NuxtLoading',
   data () {
     return {
       percent: 0,
@@ -63,7 +66,7 @@ export default {
     finish () {
       this.percent = 100
       this.hide()
-      setTimeout(_ => {
+      setTimeout((_) => {
         this.loading = false
       }, 500)
       return this

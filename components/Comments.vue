@@ -1,37 +1,39 @@
 <template>
   <div class="c-comments">
-    <button v-if="!commentsAreLoaded" class="o-btn" type="button" @click="loadComments">Load comments</button>
+    <button v-if="!commentsAreLoaded" class="o-btn" type="button" @click="loadComments">
+      Load comments
+    </button>
     <div
       class="just-comments"
       data-allowguests="true"
-      data-apikey="04cc7e14-5182-4838-94a6-fe6c84ffa546">
-    </div>
+      data-apikey="04cc7e14-5182-4838-94a6-fe6c84ffa546"
+    />
   </div>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        commentsAreLoaded: false
-      }
-    },
-    methods: {
-      loadComments () {
-        this.$el.querySelector('button').disabled = true
+export default {
+  data () {
+    return {
+      commentsAreLoaded: false
+    }
+  },
+  methods: {
+    loadComments () {
+      this.$el.querySelector('button').disabled = true
 
-        const s = document.createElement('script')
-        // TODO put this into config
-        s.src = '//just-comments.com/w.js'
-        s.setAttribute('data-timestamp', +new Date())
-        s.onload = () => {
-          this.commentsAreLoaded = true
-        }
-
-        this.$el.appendChild(s)
+      const s = document.createElement('script')
+      // TODO put this into config
+      s.src = '//just-comments.com/w.js'
+      s.setAttribute('data-timestamp', +new Date())
+      s.onload = () => {
+        this.commentsAreLoaded = true
       }
+
+      this.$el.appendChild(s)
     }
   }
+}
 </script>
 
 <style lang="scss">

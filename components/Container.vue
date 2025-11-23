@@ -2,34 +2,34 @@
   <section :class="classes">
     <div>
       <header v-if="$slots.date || $slots.headline || $slots.readingTime" class="c-container__headline">
-        <slot name="date"></slot>
-        <slot name="headline"></slot>
-        <slot name="readingTime"></slot>
+        <slot name="date" />
+        <slot name="headline" />
+        <slot name="readingTime" />
       </header>
-      <slot/>
+      <slot />
 
       <div v-if="$slots.footerLine" class="c-container__footerLine">
-        <slot name="footerLine"></slot>
+        <slot name="footerLine" />
       </div>
     </div>
   </section>
 </template>
 
 <script>
-  export default {
-    computed: {
-      classes () {
-        return {
-          'c-container': true,
-          'c-container--noPadding': this.noPadding,
-          'c-container--smallPadding': this.smallPadding,
-          'c-container--accessibleLineLength': this.accessibleLineLength,
-          'c-container--fullWidth': this.fullWidth
-        }
+export default {
+  props: ['noPadding', 'smallPadding', 'accessibleLineLength', 'fullWidth'],
+  computed: {
+    classes () {
+      return {
+        'c-container': true,
+        'c-container--noPadding': this.noPadding,
+        'c-container--smallPadding': this.smallPadding,
+        'c-container--accessibleLineLength': this.accessibleLineLength,
+        'c-container--fullWidth': this.fullWidth
       }
-    },
-    props: ['noPadding', 'smallPadding', 'accessibleLineLength', 'fullWidth']
+    }
   }
+}
 </script>
 
 <style lang="scss">
@@ -91,7 +91,6 @@
       }
     }
   }
-
 
   .c-container__footerLine {
     text-align: center;

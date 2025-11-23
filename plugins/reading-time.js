@@ -1,6 +1,6 @@
 const WORDS_PER_MIN = 275
 
-export default entry => {
+export default (entry) => {
   let count = 0
 
   if (entry.fields.body) {

@@ -2,66 +2,66 @@
   <div class="c-person u-marginTopLarge">
     <div class="c-person__image">
       <div>
-        <lazy-image class="c-person__image" :asset="person.fields.profilePhoto" :ratio="1"></lazy-image>
+        <lazy-image class="c-person__image" :asset="person.fields.profilePhoto" :ratio="1" />
         <ul class="c-person__social">
           <li v-if="twitterProfile">
-            <a v-bind:href="twitterProfile" rel="me" aria-label="Follow me on Twitter" target="_blank">
-              <Icon name="Twitter"></Icon>
+            <a :href="twitterProfile" rel="me" aria-label="Follow me on Twitter" target="_blank">
+              <Icon name="Twitter" />
             </a>
           </li>
           <li v-if="gitHubProfile">
-            <a v-bind:href="gitHubProfile" rel="me" aria-label="Follow me on GitHub" target="_blank">
-              <Icon name="GitHub"></Icon>
+            <a :href="gitHubProfile" rel="me" aria-label="Follow me on GitHub" target="_blank">
+              <Icon name="GitHub" />
             </a>
           </li>
           <li v-if="instagramProfile">
-            <a v-bind:href="instagramProfile" rel="me" aria-label="Follow me on Instagram" target="_blank">
-              <Icon name="Instagram"></Icon>
+            <a :href="instagramProfile" rel="me" aria-label="Follow me on Instagram" target="_blank">
+              <Icon name="Instagram" />
             </a>
           </li>
           <li v-if="linkedinProfile">
-            <a v-bind:href="linkedinProfile" rel="me" aria-label="Follow me on Linkedin" target="_blank">
-              <Icon name="LinkedIn"></Icon>
+            <a :href="linkedinProfile" rel="me" aria-label="Follow me on Linkedin" target="_blank">
+              <Icon name="LinkedIn" />
             </a>
           </li>
         </ul>
       </div>
     </div>
     <div class="c-person__details">
-      <div v-html="bio"></div>
+      <div v-html="bio" />
     </div>
   </div>
 </template>
 
 <script>
-  import marked from '~/plugins/marked.js'
-  import Icon from '~/components/Icon.vue'
-  import LazyImage from '~/components/LazyImage.vue'
+import marked from '~/plugins/marked.js'
+import Icon from '~/components/Icon.vue'
+import LazyImage from '~/components/LazyImage.vue'
 
-  export default {
-    computed: {
-      bio: function () {
-        return marked(this.person.fields.biography)
-      },
-      twitterProfile: function () {
-        return this.person.fields.twitterProfile
-      },
-      gitHubProfile: function () {
-        return this.person.fields.gitHubProfile
-      },
-      instagramProfile: function () {
-        return this.person.fields.instagramProfile
-      },
-      linkedinProfile: function () {
-        return this.person.fields.linkedinProfile
-      }
+export default {
+  components: {
+    Icon,
+    LazyImage
+  },
+  props: ['person'],
+  computed: {
+    bio () {
+      return marked(this.person.fields.biography)
     },
-    components: {
-      Icon,
-      LazyImage
+    twitterProfile () {
+      return this.person.fields.twitterProfile
     },
-    props: ['person']
+    gitHubProfile () {
+      return this.person.fields.gitHubProfile
+    },
+    instagramProfile () {
+      return this.person.fields.instagramProfile
+    },
+    linkedinProfile () {
+      return this.person.fields.linkedinProfile
+    }
   }
+}
 </script>
 
 <style lang="scss">
@@ -106,7 +106,6 @@
       flex-direction: row;
       border-radius: 0;
     }
-
 
     @media (min-width: 56em) {
       flex: 0 0 33.333%;

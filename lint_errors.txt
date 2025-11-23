@@ -1,0 +1,160 @@
+
+> jesus-talavera-website-nuxt@2.0.0 lint /Users/jesustg/jesustalavera.com
+> eslint --ext .js,.vue .
+
+
+/Users/jesustg/jesustalavera.com/components/Closing.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/Comments.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/Container.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/DynamicHeadline.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/EntryLink.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/Flag.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/Icon.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/ItemPreview.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/LazyImage.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/Loading.vue
+  1:1  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:1)
+
+/Users/jesustg/jesustalavera.com/components/Marked.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/Navigation.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/OfflineNotice.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/PaginationActions.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/Person.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/PrettyDate.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/RelatedItems.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/ScreenCast.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/SharingLine.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/components/Talk.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/layouts/default.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/layouts/error.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/nuxt.config.js
+   1:30  error  Unexpected require, please use import instead                                  nuxt/no-cjs-in-config
+   1:30  error  `./lib/config.js` import should occur after import of `contentful-management`  import/order
+  17:23  error  Unexpected require, please use import instead                                  nuxt/no-cjs-in-config
+  29:23  error  Unexpected require, please use import instead                                  nuxt/no-cjs-in-config
+  85:1   error  Unexpected module.exports, please use export default instead                   nuxt/no-cjs-in-config
+
+/Users/jesustg/jesustalavera.com/pages/_slug.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/blog/_slug.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/blog/index.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/blog/page/_page.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/blog/tag/_tag.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/i-would-love-to-speak.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/index.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/newsletter.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/projects.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/resources.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/smalltalk.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/snippets.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/talks.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/today-i-learned/_slug.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/pages/today-i-learned/index.vue
+  1:0  error  Parsing error: This experimental syntax requires enabling one of the following parser plugin(s): "jsx", "flow", "typescript". (1:0)
+
+/Users/jesustg/jesustalavera.com/plugins/accessible-emojis.js
+  25:9  warning  Unexpected console statement  no-console
+
+/Users/jesustg/jesustalavera.com/plugins/contentful.js
+   29:5   error    Async method 'getMe' has no 'await' expression            require-await
+   39:25  warning  Unexpected console statement                              no-console
+   45:5   error    Async method 'getFutureEvents' has no 'await' expression  require-await
+   60:25  warning  Unexpected console statement                              no-console
+   66:5   error    Async method 'getPastEvents' has no 'await' expression    require-await
+   80:25  warning  Unexpected console statement                              no-console
+   86:5   error    Async method 'getLandingpages' has no 'await' expression  require-await
+   96:25  warning  Unexpected console statement                              no-console
+  102:5   error    Async method 'getPosts' has no 'await' expression         require-await
+  113:25  warning  Unexpected console statement                              no-console
+  119:5   error    Async method 'getProjects' has no 'await' expression      require-await
+  129:25  warning  Unexpected console statement                              no-console
+  135:5   error    Async method 'getResources' has no 'await' expression     require-await
+  146:25  warning  Unexpected console statement                              no-console
+  152:5   error    Async method 'getScreencasts' has no 'await' expression   require-await
+  163:25  warning  Unexpected console statement                              no-console
+  169:5   error    Async method 'getTalks' has no 'await' expression         require-await
+  180:25  warning  Unexpected console statement                              no-console
+  186:5   error    Async method 'getTil' has no 'await' expression           require-await
+  197:25  warning  Unexpected console statement                              no-console
+
+✖ 63 problems (52 errors, 11 warnings)
+
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! jesus-talavera-website-nuxt@2.0.0 lint: `eslint --ext .js,.vue .`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the jesus-talavera-website-nuxt@2.0.0 lint script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/jesustg/.npm/_logs/2025-11-23T10_22_31_478Z-debug.log

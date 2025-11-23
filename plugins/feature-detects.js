@@ -21,7 +21,7 @@ const checkWebpSupport = () => {
 export const supportsWebp = () => {
   if (webpIsSupported === null) {
     return checkWebpSupport()
-      .then(result => {
+      .then((result) => {
         webpIsSupported = result
         return webpIsSupported
       })

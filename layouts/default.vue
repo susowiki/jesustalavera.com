@@ -1,37 +1,37 @@
 <template>
   <div :class="[ !isOnline ? 'is-offline' : '', 'u-overflowHidden' ]">
-    <offline-notice v-if="!isOnline"/>
-    <navigation/>
+    <offline-notice v-if="!isOnline" />
+    <navigation />
     <main>
-      <nuxt/>
+      <nuxt />
     </main>
-    <closing/>
+    <closing />
   </div>
 </template>
 
 <script>
-  import Closing from '~/components/Closing.vue'
-  import Navigation from '~/components/Navigation.vue'
-  import OfflineNotice from '~/components/OfflineNotice.vue'
+import Closing from '~/components/Closing.vue'
+import Navigation from '~/components/Navigation.vue'
+import OfflineNotice from '~/components/OfflineNotice.vue'
 
-  export default {
-    components: {
-      Closing,
-      Navigation,
-      OfflineNotice
-    },
-    data () {
-      return {
-        isOnline: true
-      }
-    },
-    mounted () {
-      window.addEventListener('load', () => {
-        window.addEventListener('online', () => { this.isOnline = true })
-        window.addEventListener('offline', () => { this.isOnline = false })
-      })
+export default {
+  components: {
+    Closing,
+    Navigation,
+    OfflineNotice
+  },
+  data () {
+    return {
+      isOnline: true
     }
+  },
+  mounted () {
+    window.addEventListener('load', () => {
+      window.addEventListener('online', () => { this.isOnline = true })
+      window.addEventListener('offline', () => { this.isOnline = false })
+    })
   }
+}
 </script>
 
 <style lang="scss">
@@ -148,7 +148,6 @@
     background: var(--c-highlight);
     color: #fff;
   }
-
 
   .is-offline {
     filter: grayscale(100%);

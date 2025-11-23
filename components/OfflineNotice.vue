@@ -1,5 +1,7 @@
 <template>
-  <div class="c-offlineNotice" role="alert">You're offline...</div>
+  <div class="c-offlineNotice" role="alert">
+    You're offline...
+  </div>
 </template>
 
 <style>

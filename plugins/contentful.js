@@ -32,7 +32,7 @@ export default ({ app, env, store }) => {
           .getEntries({
             'sys.id': env.CTF_ME_ID
           })
-          .then(res => {
+          .then((res) => {
             store.commit('me/setMe', res.items[0])
             return res.items[0]
           })
@@ -53,7 +53,7 @@ export default ({ app, env, store }) => {
               +new Date() - 1000 * 60 * 60 * 24
             ).toISOString()
           })
-          .then(res => {
+          .then((res) => {
             store.commit('events/setFutureList', res.items)
             return res.items
           })
@@ -73,7 +73,7 @@ export default ({ app, env, store }) => {
             'fields.end[lte]': new Date().toISOString(),
             'fields.state': 'accepted'
           })
-          .then(res => {
+          .then((res) => {
             store.commit('events/setPastList', res.items)
             return res.items
           })
@@ -89,7 +89,7 @@ export default ({ app, env, store }) => {
           .getEntries({
             content_type: env.CTF_LANDING_PAGE_ID
           })
-          .then(res => {
+          .then((res) => {
             store.commit('landingpages/setList', res.items)
             return res.items
           })
@@ -106,7 +106,7 @@ export default ({ app, env, store }) => {
             content_type: env.CTF_POST_ID,
             order: '-fields.date'
           })
-          .then(res => {
+          .then((res) => {
             store.commit('posts/setList', res.items)
             return res.items
           })
@@ -122,7 +122,7 @@ export default ({ app, env, store }) => {
           .getEntries({
             content_type: env.CTF_PROJECT_ID
           })
-          .then(res => {
+          .then((res) => {
             store.commit('projects/setList', res.items)
             return res.items
           })
@@ -139,7 +139,7 @@ export default ({ app, env, store }) => {
             content_type: env.CTF_LANDING_PAGE_ID,
             'fields.isResource': 'true'
           })
-          .then(res => {
+          .then((res) => {
             store.commit('resources/setList', res.items)
             return res.items
           })
@@ -156,7 +156,7 @@ export default ({ app, env, store }) => {
             content_type: env.CTF_SCREENCAST_ID,
             order: '-fields.publishDate'
           })
-          .then(res => {
+          .then((res) => {
             store.commit('screencasts/setList', res.items)
             return res.items
           })
@@ -173,7 +173,7 @@ export default ({ app, env, store }) => {
             content_type: env.CTF_TALK_ID,
             order: '-fields.date'
           })
-          .then(res => {
+          .then((res) => {
             store.commit('talks/setList', res.items)
             return res.items
           })
@@ -190,7 +190,7 @@ export default ({ app, env, store }) => {
             content_type: env.CTF_TIL_ID,
             order: '-fields.date'
           })
-          .then(res => {
+          .then((res) => {
             store.commit('til/setList', res.items)
             return res.items
           })

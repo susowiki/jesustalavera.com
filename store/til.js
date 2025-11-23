@@ -14,7 +14,7 @@ export const mutations = {
     state.active = item
   },
   setList (state, posts) {
-    state.list.push(...posts.map(entry => {
+    state.list.push(...posts.map((entry) => {
       entry.fields.readingTime = ReadingTime(entry)
       return entry
     }))

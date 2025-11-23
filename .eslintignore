@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log
+.nuxt
+dist
+static/sw.js
+static/workbox-sw*.js
+static/workbox-sw*.js.map
+static/sitemap.xml
+.functions
+.sqip
+plugins/image-map.js
+*.idea
+*.iml
+static/**/*.min.js

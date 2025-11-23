@@ -1,8 +1,10 @@
 import Vue from 'vue'
-import url from 'url'
-
-Vue.filter('externalUrl', value => {
-  return url.parse(value).host
+Vue.filter('externalUrl', (value) => {
+  try {
+    return new URL(value).host
+  } catch (e) {
+    return ''
+  }
 })
 
 Vue.filter('idAlize', (title, options = {}) => {

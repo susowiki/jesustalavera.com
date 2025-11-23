@@ -21,7 +21,7 @@ export const mutations = {
   setList (state, posts) {
     state.list.length = 0
     state.list.push(
-      ...posts.map(entry => {
+      ...posts.map((entry) => {
         entry.fields.readingTime = ReadingTime(entry)
         entry.fields.isDraft = entry.sys.revision === 0
         return entry

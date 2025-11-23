@@ -19,7 +19,7 @@ export default {
 
     return h(
       externalUrl ? 'a' : 'nuxt-link',
-      externalUrl ? {attrs: {href: this.url}} : {props: {to: this.url}},
+      externalUrl ? { attrs: { href: this.url } } : { props: { to: this.url } },
       [
         this.text || this.entry.fields.title
       ]

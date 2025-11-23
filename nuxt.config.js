@@ -1,4 +1,7 @@
+const cdaContentful = require('contentful')
+const cmaContentful = require('contentful-management')
 const { getConfigForKeys } = require('./lib/config.js')
+
 const ctfConfig = getConfigForKeys([
   'CTF_SPACE_ID',
   'CTF_CDA_TOKEN',
@@ -14,7 +17,6 @@ const ctfConfig = getConfigForKeys([
   'CTF_LANDING_PAGE_ID'
 ])
 
-const cdaContentful = require('contentful')
 const cdaClient = cdaContentful.createClient({
   accessToken:
     process.env.NODE_ENV === 'production'
@@ -26,12 +28,65 @@ const cdaClient = cdaContentful.createClient({
       : 'preview.contentful.com',
   space: ctfConfig.CTF_SPACE_ID
 })
-const cmaContentful = require('contentful-management')
+
 const cmaClient = cmaContentful.createClient({
   accessToken: ctfConfig.CTF_CMA_TOKEN
 })
 
-const config = {
+function getAllRoutes () {
+  return Promise.all([
+    cdaClient.getEntries({
+      content_type: '2wKn6yEnZewu2SCCkus4as',
+      order: '-fields.date'
+    }),
+    cdaClient.getEntries({
+      content_type: 'tilPost',
+      order: '-fields.date'
+    }),
+    cdaClient.getEntries({
+      content_type: 'landingPage'
+    }),
+    cmaClient
+      .getSpace(ctfConfig.CTF_SPACE_ID)
+      .then(space => space.getContentType('2wKn6yEnZewu2SCCkus4as'))
+  ]).then(([blogPosts, tilPosts, landingPages, postType]) => {
+    const postPages = blogPosts.items.reduce((pages, entry, index) => {
+      // the external posts don't need do be rendered
+      if (!entry.fields.externalUrl) {
+        pages.push(`/blog/${entry.fields.slug}`)
+      }
+
+      if (index % 5 === 0 && index !== 0) {
+        pages.push(`/blog/page/${Math.floor(index / 5)}`)
+      }
+
+      return pages
+    }, [])
+
+    const tilPages = tilPosts.items.reduce((pages, entry, index) => {
+      pages.push(`/today-i-learned/${entry.fields.slug}`)
+
+      return pages
+    }, [])
+
+    const landingPageSlugs = landingPages.items.map(item => `/${item.fields.slug}`)
+
+    const tags = postType.fields
+      .find(field => field.id === 'tags')
+      .items.validations[0].in.map(category => `/blog/tag/${category}`)
+
+    return [
+      ...postPages,
+      ...tilPages,
+      ...landingPageSlugs,
+      ...tags
+    ]
+  })
+}
+
+module.exports = {
+  target: 'static', // Default for Nuxt 2 static generation
+
   /*
   ** Headers of the page
   */
@@ -92,18 +147,6 @@ const config = {
     linkExactActiveClass: 'is-active'
   },
 
-  transition: {
-    afterEnter (el) {
-      const h1 = el.querySelector('h1')
-
-      if (!h1) {
-        return console.error('No h1 on', el)
-      }
-
-      h1.focus()
-    }
-  },
-
   /*
   ** Plugin configuration
   */
@@ -118,88 +161,73 @@ const config = {
   */
   modules: [
     '@nuxtjs/sitemap',
-    [
-      '@nuxtjs/pwa',
-      {
-        manifest: {
-          name: 'Jesus Talavera Web Development',
-          lang: 'en',
-          short_name: 'SJ Web Dev',
-          theme_color: '#fefff4'
-        },
-        workbox: {
-          runtimeCaching: [
-            {
-              urlPattern: 'https://.*?.contentful.com/.*'
-            }
-          ]
-        }
-      }
-    ],
+    '@nuxtjs/pwa',
     ['@nuxtjs/google-analytics', { ua: 'UA-104150131-1' }]
   ],
+
+  buildModules: [
+    '@nuxtjs/eslint-module'
+  ],
+
+  pwa: {
+    manifest: {
+      name: 'Jesus Talavera Web Development',
+      lang: 'en',
+      short_name: 'SJ Web Dev',
+      theme_color: '#fefff4'
+    },
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: 'https://.*?.contentful.com/.*'
+        }
+      ]
+    }
+  },
 
   /*
   ** Build configuration
   */
   build: {
+    friendlyErrors: false,
     analyze: false,
-
-    /*
-    ** Run ESLINT on save
-    */
     extend (config, ctx) {
-      if (ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-
-      config.module.rules.forEach(rule => {
-        // overwrite nuxt defaults
-        // they inline svg's base64
-        if (rule.loader === 'url-loader') {
-          rule.test = /\.(png|jpe?g|gif)$/
-        }
-
-        // get CSS out of the JS
-        if (rule.loader === 'vue-loader') {
-          rule.options.extractCSS = true
+      // Find and modify existing rules that might handle SVGs
+      const rules = config.module.rules
+      rules.forEach((rule) => {
+        if (rule.test && rule.test.toString().includes('svg')) {
+          // Create a new test regex without svg
+          // This assumes the rule was something like /\.(png|jpe?g|gif|svg)$/
+          // We replace it with /\.(png|jpe?g|gif)$/ or similar, effectively removing 'svg'
+          // A safer way is to just exclude .svg from this rule
+          rule.exclude = rule.exclude || []
+          if (!Array.isArray(rule.exclude)) { rule.exclude = [rule.exclude] }
+          rule.exclude.push(/\.svg$/)
         }
       })
 
-      config.module.rules.push({
+      // Add svg-inline-loader
+      rules.push({
         test: /\.svg$/,
-        loader: 'svg-inline-loader'
+        loader: 'svg-inline-loader',
+        options: {
+          removeSVGTagAttrs: false // Keep attributes like viewBox
+        }
       })
-    },
-
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['> 5%']
-      })
-    ],
-
-    vendor: [
-      'inert-polyfill',
-      'wicg-focus-ring'
-    ]
+    }
   },
 
   // related to
   // '@nuxtjs/sitemap'
   sitemap: {
-    generate: true,
     hostname: 'https://www.jesustalavera.com',
     routes: getAllRoutes,
     exclude: ['/404']
   },
 
   generate: {
-    routes: getAllRoutes
+    routes: getAllRoutes,
+    fallback: true
   },
 
   env: {
@@ -218,60 +246,3 @@ const config = {
     CTF_LANDING_PAGE_ID: ctfConfig.CTF_LANDING_PAGE_ID
   }
 }
-
-function getAllRoutes () {
-  return Promise.all([
-    cdaClient.getEntries({
-      content_type: '2wKn6yEnZewu2SCCkus4as',
-      order: '-fields.date'
-    }),
-    cdaClient.getEntries({
-      content_type: 'tilPost',
-      order: '-fields.date'
-    }),
-    cdaClient.getEntries({
-      content_type: 'landingPage'
-    }),
-    cmaClient
-      .getSpace(ctfConfig.CTF_SPACE_ID)
-      .then(space => space.getContentType('2wKn6yEnZewu2SCCkus4as'))
-  ]).then(([blogPosts, tilPosts, landingPages, postType]) => {
-    const postPages = blogPosts.items.reduce((pages, entry, index) => {
-      // the external posts don't need do be rendered
-      if (!entry.fields.externalUrl) {
-        pages.push(`/blog/${entry.fields.slug}`)
-      }
-
-      if (index % 5 === 0 && index !== 0) {
-        pages.push(`/blog/page/${Math.floor(index / 5)}`)
-      }
-
-      return pages
-    }, [])
-
-    const tilPages = tilPosts.items.reduce((pages, entry, index) => {
-      pages.push(`/today-i-learned/${entry.fields.slug}`)
-
-      return pages
-    }, [])
-
-    const landingPageSlugs = landingPages.items.map(item => `/${item.fields.slug}`)
-
-    const tags = postType.fields
-      .find(field => field.id === 'tags')
-      .items.validations[0].in.map(category => `/blog/tag/${category}`)
-
-    return [
-      ...postPages,
-      ...tilPages,
-      ...landingPageSlugs,
-      ...tags
-    ]
-  })
-}
-
-if (process.env.NODE_ENV !== 'production') {
-  // config.css = [{ src: '~/node_modules/a11y.css/css/a11y-en.css' }]
-}
-
-module.exports = config

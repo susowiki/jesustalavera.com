@@ -2,23 +2,31 @@
   <Container class="c-newsletter t-container">
     <div class="c-tile c-tile--bigHighlight u-heightAuto u-marginBottomMedium">
       <div class="c-tile__container">
-        <nuxt-link :to="$route.query.back" v-if="$route.query.back" class="c-newsletter__close" aria-label="Go to preview page">
+        <nuxt-link v-if="$route.query.back" :to="$route.query.back" class="c-newsletter__close" aria-label="Go to preview page">
           <span aria-hidden="true">×</span>
         </nuxt-link>
-        <svg viewBox="0 0 380 200" class="c-newsletter__letter" preserveAspectRatio="none"><rect fill="#F8F8F8" width="380" height="200" rx="5"/><path fill="#E7E7E7" d="M190 35l188 162H2z"/><path fill="#D2D2D2" d="M190 132L2 3h376z"/></svg>
-        <h1 tabindex="-1" class="u-noMarginBottom u-marginTopMedium">Monthly digest</h1>
+        <svg viewBox="0 0 380 200" class="c-newsletter__letter" preserveAspectRatio="none"><rect fill="#F8F8F8" width="380" height="200" rx="5" /><path fill="#E7E7E7" d="M190 35l188 162H2z" /><path fill="#D2D2D2" d="M190 132L2 3h376z" /></svg>
+        <h1 tabindex="-1" class="u-noMarginBottom u-marginTopMedium">
+          Monthly digest
+        </h1>
         <form style="text-align:center;" action="https://tinyletter.com/jesustalavera" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/stefanjudis', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
           <p class="u-marginBottomLarge u-noMarginTop">
-            <nuxt-link to="/blog/">New posts</nuxt-link> and <nuxt-link to="/today-i-learned">new learnings</nuxt-link> directly to your inbox.
+            <nuxt-link to="/blog/">
+              New posts
+            </nuxt-link> and <nuxt-link to="/today-i-learned">
+              new learnings
+            </nuxt-link> directly to your inbox.
           </p>
           <p class="u-marginBottomMedium">
             <label for="tlemail">Email address
-              <input type="email" name="email" id="tlemail" placeholder="janedoe@example.com" required/>
+              <input id="tlemail" type="email" name="email" placeholder="janedoe@example.com" required>
             </label>
           </p>
           <div class="c-tile__footer">
-            <input type="hidden" value="1" name="embed"/>
-            <button type="submit">Subscribe</button>
+            <input type="hidden" value="1" name="embed">
+            <button type="submit">
+              Subscribe
+            </button>
           </div>
         </form>
       </div>
@@ -28,22 +36,22 @@
 </template>
 
 <script>
-  import Container from '~/components/Container.vue'
-  import {createPage} from '~/lib/basepage.js'
+import Container from '~/components/Container.vue'
+import { createPage } from '~/lib/basepage.js'
 
-  export default createPage({
-    head () {
-      return {
-        title: `Jesus Talavera Web Development - Newsletter`,
-        meta: [
-          { hid: 'description', name: 'description', content: `Subscribe to my monthly newsletter` }
-        ]
-      }
-    },
-    components: {
-      Container
+export default createPage({
+  head () {
+    return {
+      title: 'Jesus Talavera Web Development - Newsletter',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Subscribe to my monthly newsletter' }
+      ]
     }
-  })
+  },
+  components: {
+    Container
+  }
+})
 </script>
 
 <style lang="scss">

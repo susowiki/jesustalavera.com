@@ -1,18 +1,18 @@
 <template>
-  <div class="c-markdown" v-if="renderedHtml" v-html="renderedHtml"></div>
+  <div v-if="renderedHtml" class="c-markdown" v-html="renderedHtml" />
 </template>
 
 <script>
-  import marked from '~/plugins/marked.js'
+import marked from '~/plugins/marked.js'
 
-  export default {
-    props: ['markdown'],
-    computed: {
-      renderedHtml () {
-        return marked(this.markdown)
-      }
+export default {
+  props: ['markdown'],
+  computed: {
+    renderedHtml () {
+      return marked(this.markdown)
     }
   }
+}
 </script>
 
 <style lang="scss">

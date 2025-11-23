@@ -1,9 +1,10 @@
 <template>
   <Container class="t-container" accessible-line-length="true">
-    <h1 slot="headline" tabindex="-1">Hey there! 👋</h1>
+    <h1 slot="headline" tabindex="-1">
+      Hey there! 👋
+    </h1>
     <div class="c-tile">
       <div class="c-tile__container">
-
         <p>
           In case you're considering to let me speak at your event you probably need some information.
           First of all, I'm really happy about any invitation to speak somewhere... so <strong>thank you!</strong>
@@ -19,7 +20,7 @@
             Short bio
           </dt>
           <dd>
-            <Marked :markdown="me.fields.speakerBio"></Marked>
+            <Marked :markdown="me.fields.speakerBio" />
           </dd>
           <dt>
             Favorite talk topics
@@ -32,12 +33,12 @@
           </dt>
           <dd>
             <ul class="o-list-thirds">
-              <li v-for="image in me.fields.images" class="u-marginBottomLarge" :key="image.sys.id">
+              <li v-for="image in me.fields.images" :key="image.sys.id" class="u-marginBottomLarge">
                 <div class="u-flex-column u-height-100">
                   <!-- this is container is needed because of a FF bug -->
                   <div>
                     <a :href="image.fields.file.url">
-                      <lazy-image :asset="image" :ratio="0.65"></lazy-image>
+                      <lazy-image :asset="image" :ratio="0.65" />
                     </a>
                   </div>
                 </div>
@@ -81,41 +82,41 @@
 </template>
 
 <script>
-  import Container from '~/components/Container.vue'
-  import Marked from '~/components/Marked.vue'
-  import LazyImage from '~/components/LazyImage.vue'
-  import {createPage} from '~/lib/basepage.js'
+import Container from '~/components/Container.vue'
+import Marked from '~/components/Marked.vue'
+import LazyImage from '~/components/LazyImage.vue'
+import { createPage } from '~/lib/basepage.js'
 
-  export default createPage({
-    async fetch ({ app }) {
-      const { getPastEvents, getMe } = app.contentful
-      await Promise.all([
-        getPastEvents(),
-        getMe()
-      ])
+export default createPage({
+  async fetch ({ app }) {
+    const { getPastEvents, getMe } = app.contentful
+    await Promise.all([
+      getPastEvents(),
+      getMe()
+    ])
+  },
+  computed: {
+    events () {
+      return this.$store.state.events.pastList
     },
-    computed: {
-      events () {
-        return this.$store.state.events.pastList
-      },
-      me () {
-        return this.$store.state.me.entry
-      }
-    },
-    head () {
-      return {
-        title: `Jesus Talavera Web Development - Speaker information`,
-        meta: [
-          { hid: 'description', name: 'description', content: `You want me to speak at your event? Great - here is some basic information` }
-        ]
-      }
-    },
-    components: {
-      Container,
-      Marked,
-      LazyImage
+    me () {
+      return this.$store.state.me.entry
     }
-  })
+  },
+  head () {
+    return {
+      title: 'Jesus Talavera Web Development - Speaker information',
+      meta: [
+        { hid: 'description', name: 'description', content: 'You want me to speak at your event? Great - here is some basic information' }
+      ]
+    }
+  },
+  components: {
+    Container,
+    Marked,
+    LazyImage
+  }
+})
 </script>
 
 <style scoped>

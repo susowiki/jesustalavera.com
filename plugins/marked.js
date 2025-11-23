@@ -1,13 +1,12 @@
-import marked from 'marked'
+import { marked } from 'marked'
 import Prism from 'prismjs'
-import {makeEmojisAccessible} from './accessible-emojis.js'
+import { makeEmojisAccessible } from './accessible-emojis.js'
 
 const renderer = new marked.Renderer()
 
 renderer.code = (code, language) => {
-  return `<pre class="o-code o-code-${language || 'whatevs'}"><code>${
-    language ? Prism.highlight(code, Prism.languages[language]) : code
-  }</code></pre>`
+  return `<pre class="o-code o-code-${language || 'whatevs'}"><code>${language ? Prism.highlight(code, Prism.languages[language]) : code
+    }</code></pre>`
 }
 
 renderer.heading = function (text, level) {
@@ -33,10 +32,10 @@ renderer.image = (href, title, text) => {
   return `<img src="${href}" alt="${text}">`
 }
 
-renderer.paragraph = (text) => `<p>${makeEmojisAccessible(text)}</p>\n`
+renderer.paragraph = text => `<p>${makeEmojisAccessible(text)}</p>\n`
 
 export default function (text) {
   return text
-    ? marked(text, { renderer })
+    ? marked.parse(text, { renderer })
     : ''
 }

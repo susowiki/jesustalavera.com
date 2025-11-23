@@ -2,7 +2,7 @@ exports.handler = (event, context, callback) => {
   if (event.body) {
     const apiKey = process.env.MG_TOKEN
     const domain = process.env.MG_DOMAIN
-    const mailgun = require('mailgun-js')({apiKey, domain})
+    const mailgun = require('mailgun-js')({ apiKey, domain })
     const report = JSON.parse(event.body)['csp-report']
 
     const blockedUri = report['blocked-uri']
@@ -17,7 +17,7 @@ exports.handler = (event, context, callback) => {
       })
     }
 
-    var data = {
+    const data = {
       from: 'CSP Report Bot <csp@jesustalavera.com>',
       to: 'susowiki@gmail.com',
       subject: `Blocked resource (${blockedUri}) on ${report['document-uri']}`,

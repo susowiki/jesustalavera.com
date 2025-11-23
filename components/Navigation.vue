@@ -4,8 +4,8 @@
       name="staggered-item"
       tag="ul"
       class="c-navigation__complete"
-      v-on:before-enter="beforeEnter"
       :inert="!mainNavIsVisible && !showFullNav"
+      @before-enter="beforeEnter"
     >
       <li
         v-for="(item, index) in menu"
@@ -13,81 +13,81 @@
         :data-index="index"
       >
         <nuxt-link :to="item.url">
-          <Icon v-if="item.icon" :name="item.icon"></Icon>
+          <Icon v-if="item.icon" :name="item.icon" />
           {{ item.label }}
         </nuxt-link>
       </li>
     </transition-group>
     <ul class="c-navigation__reduced" :inert="mainNavIsVisible">
       <li v-for="item in reducedNav" :key="item.url">
-        <nuxt-link :to="item.url">{{ item.label }}</nuxt-link>
+        <nuxt-link :to="item.url">
+          {{ item.label }}
+        </nuxt-link>
       </li>
     </ul>
-    <button type="button" class="c-navigation__toggle" @click="toggleNav()" :aria-lable="mainNavIsVisible ? 'Close navigation' : 'Open navigation'">
+    <button type="button" class="c-navigation__toggle" :aria-lable="mainNavIsVisible ? 'Close navigation' : 'Open navigation'" @click="toggleNav()">
       {{ mainNavIsVisible ? 'Close' : 'Menu' }}
     </button>
   </nav>
 </template>
 <script>
-  import Icon from '~/components/Icon.vue'
-  import Container from '~/components/Container.vue'
+import Icon from '~/components/Icon.vue'
 
-  export default {
-    mounted () {
-      this.$router.afterEach(_ => this.toggleNav({isOpen: false}))
+export default {
+  components: {
+    Icon
+  },
+  data () {
+    return {
+      mainNavIsVisible: false,
+      mainNav: [
+        { label: 'Home', url: '/', icon: 'Home' },
+        // { label: 'Blog', url: '/blog/', icon: 'Blog' },
+        { label: 'Resources', url: '/resources/', icon: 'Resources' }
+        // { label: 'Talks', url: '/talks/', icon: 'Talk' },
+        // { label: 'Smalltalk', url: '/smalltalk/', icon: 'Smalltalk' },
+        // { label: 'Today I learned', url: '/today-i-learned/', icon: 'Learn' }
+        // { label: 'Projects', url: '/projects/', icon: 'Project' },
+        // { label: 'Snippets', url: '/snippets/', icon: 'Snippet' }
 
-      const mql = window.matchMedia('(min-width:38em)')
+      ],
+      reducedNav: [
+        { label: 'Home', url: '/' },
+        // { label: 'Blog', url: '/blog/' },
+        { label: 'Resources', url: '/resources' }
+      ],
+      showFullNav: true
+    }
+  },
+  computed: {
+    menu () {
+      return this.mainNavIsVisible || this.showFullNav
+        ? this.mainNav
+        : []
+    }
+  },
+  mounted () {
+    this.$router.afterEach(_ => this.toggleNav({ isOpen: false }))
+
+    const mql = window.matchMedia('(min-width:38em)')
+    this.showFullNav = mql.matches
+
+    mql.addListener((mql) => {
       this.showFullNav = mql.matches
-
-      mql.addListener(mql => {
-        this.showFullNav = mql.matches
-      })
+    })
+  },
+  methods: {
+    toggleNav (options = {}) {
+      // todo focus the first element
+      this.mainNavIsVisible = typeof options.isOpen !== 'undefined'
+        ? options.isOpen
+        : !this.mainNavIsVisible
     },
-    data () {
-      return {
-        mainNavIsVisible: false,
-        mainNav: [
-          { label: 'Home', url: '/', icon: 'Home' },
-          // { label: 'Blog', url: '/blog/', icon: 'Blog' },
-          { label: 'Resources', url: '/resources/', icon: 'Resources' }
-          // { label: 'Talks', url: '/talks/', icon: 'Talk' },
-          // { label: 'Smalltalk', url: '/smalltalk/', icon: 'Smalltalk' },
-          // { label: 'Today I learned', url: '/today-i-learned/', icon: 'Learn' }
-          // { label: 'Projects', url: '/projects/', icon: 'Project' },
-          // { label: 'Snippets', url: '/snippets/', icon: 'Snippet' }
-
-        ],
-        reducedNav: [
-          { label: 'Home', url: '/' },
-          // { label: 'Blog', url: '/blog/' },
-          { label: 'Resources', url: '/resources' }
-        ],
-        showFullNav: true
-      }
-    },
-    computed: {
-      menu () {
-        return this.mainNavIsVisible || this.showFullNav
-          ? this.mainNav
-          : []
-      }
-    },
-    methods: {
-      toggleNav (options = {}) {
-        // todo focus the first element
-        this.mainNavIsVisible = typeof options.isOpen !== 'undefined'
-          ? options.isOpen
-          : !this.mainNavIsVisible
-      },
-      beforeEnter (el) {
-        el.style.transitionDelay = `${0.05 * (this.menu.length / 2 - el.dataset.index % 3)}s`
-      }
-    },
-    components: {
-      Container,
-      Icon
+    beforeEnter (el) {
+      el.style.transitionDelay = `${0.05 * (this.menu.length / 2 - el.dataset.index % 3)}s`
     }
   }
+}
 </script>
 
 <style lang="scss">

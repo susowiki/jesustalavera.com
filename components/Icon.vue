@@ -1,5 +1,5 @@
 <template>
-  <span v-html="icons[name]" :class="'icon-' + name"></span>
+  <span :class="'icon-' + name" v-html="icons[name]" />
 </template>
 <script>
 
@@ -22,6 +22,8 @@ const addAriaHiddenToSvg = (svg) => {
 }
 
 export default {
+
+  props: ['name'],
   data () {
     return {
       icons: {
@@ -41,8 +43,6 @@ export default {
         Snippet: addAriaHiddenToSvg(Snippet)
       }
     }
-  },
-
-  props: ['name']
+  }
 }
 </script>
